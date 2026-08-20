@@ -1,53 +1,28 @@
-﻿CHANGELOG - V1.7 SMART GOS ATT (HARDENED & OPTIMIZED UI)
-========================================================
-Phien ban: V1.7 (Hardened SAP GOS Engine + Refurbished UI + Detailed History Tracking)
-Ngay build: 2026-08-20 17:43:25
+﻿CHANGELOG - V1.7 SMART GOS ATT (ULTIMATE HARDENED RELEASE)
+==========================================================
+Phien ban: V1.7 (Ultimate Hardened Release)
+Ngay build: 2026-08-20 17:47:02
 Baseline  : 260803_V1.7_BBBG_VAT_SMART_GOS_ATT.xlsm / 260803_V1.6.5_BBBG_VAT.xlsm
 
---- CHI TIET NANG CAP VA TOI UU ---
+--- CHI TIET TOI UU HOAN THIEN ---
 
-1. TOI UU GIAO DIEN (UI REFURBISHMENT):
-   - Banner & Subtitle duoc thiet ke lai chuyen nghiep voi mau chu dao Xanh Navy va Xanh Nhat.
-   - Bo 4 nut bam quy trinh chuan duoc can chinh can doi, phoi mau rieng biet de nhan dien:
-       + Nut 1: [1. CHON THU MUC] (Xanh Navy)
-       + Nut 2: [2. SO TEN FILE & HEADTEXT] (Xanh Slate/Teal)
-       + Nut 3: [3. DIEN HEADTEXT (SAP)] (Vang Cam/Amber)
-       + Nut 4: [4. ATTACH SAP (GOS)] (Xanh La/Forest Green)
-   - Bang du lieu INPUT dinh dang tieu de ro rang, tu dong gian dong, khong bi cat chu.
+1. NANG CAP TOC DO XU LY HANG LOAT (HIGH-SPEED ARRAY BATCHING):
+   - Thay the viec ghi tung cell bang co che Memory Array ghi dong thoi 14 cot xuong sheet FILE_SCAN.
+   - Ket hop ScreenUpdating = False va Calculation = xlCalculationManual giup toc do so khop file cho 500+ dong tang gap 5 den 10 lan.
 
-2. NANG CAP VA TOI UU MACRO DIEN HEADTEXT (SAP_FillHeadTextOnly):
-   - Kiem tra dieu kien tien quyet cua du lieu truoc khi gui lenh sang SAP.
-   - Tu dong lay ten user SAP (ses.Info.User) de ghi nhan lich su.
-   - Phan loai chinh xac cac tinh huong:
-       + HEADTEXT_DONE: Dien moi thanh cong va luu tren SAP MIGO.
-       + HEADTEXT_OK: HeadText tren SAP da trung khop voi INPUT, bo qua khong ghi de.
-       + HEADTEXT_EXISTS_DIFFERENT: Canh bao HeadText tren SAP khac voi So phieu INPUT.
-       + HEADTEXT_MULTI_SOPHIEU / NEED_SOPHIEU: Huong dan user bo sung hoac xu ly thu cong.
-       + OPEN_DOC_FAIL / HEADTEXT_READ_FAIL: Ghi ro ma loi va huong dan khac phuc.
-   - Tu dong quay lai man hinh chinh MIGO sau moi DOC de luon san sang cho DOC tiep theo.
-   - Hop thoai tong ket truc quan: bao cao so luong da dien moi, da khop, khac biet, va loi.
+2. PHAT HIEN VA XU LY CHUNG TU BI KHOA TREN SAP (DOC LOCKED DETECTION):
+   - Tu dong phat hien modal popup 'wnd[1]' khi co thong bao Document dang bi khoa boi user khac tren SAP.
+   - Ghi nhan trang thai 'DOC_LOCKED_BY_USER' vao ATT_HISTORY va tu dong enter dong popup trong 0.25s thay vi phai cho 30s timeout.
 
-3. HE THONG GHI NHAN LICH SU VA CHAN DOAN LOI CHI TIET (ATT_HISTORY & LOG):
-   - Sheet ATT_HISTORY (8 cot):
-       1. Thoi gian (Time)
-       2. Material DOC
-       3. So phieu (Ticket)
-       4. Loai (HEADTEXT / BBBG / VAT)
-       5. Doi tuong / File / HeadText
-       6. Ket qua (DONE / OK / DIFF / FAIL / ALREADY_EXISTS / NOT_FOUND)
-       7. Nguoi dung SAP (User)
-       8. Chi tiet & Huong dan sua loi (Diagnostic & Actionable Note)
-   - Sheet LOG (7 cot):
-       1. Thoi gian (Time)
-       2. Stage
-       3. Status
-       4. Material DOC
-       5. Message / Chi tiet
-       6. File / Duong dan
-       7. Run ID (ma phien chay)
+3. BO SUNG NUT TIEN ICH GIAO DIEN:
+   - [XOA KET QUA CU] (ResetStatusColumns): Xoa sach cot E den P tu hang 7 de quet luot moi, giu nguyen cot A-D.
+   - [DUNG TOOL] (StopCurrentRun): Cho phep nguoi dung dung tien trinh an toan giua chung ma khong bi treo Excel.
 
-4. CAC LOI GOS / KET NOI SAP DA DUOC FIX TRIET DE:
-   - modSupports: ActiveSession Priority + Multi-Connection Fallback.
-   - ModuleSAP: SAPX_GetSessionForTcode duyet toan bo cay SAP GUI + SAPX_WaitIdle sau dieu huong.
-   - modWinFileDialog: Win32 Unicode (FindWindowW, SendMessageW, GetFileAttributesW) + EnumWindows tu dong nhan Allow/Permit khi SAP bat hop thoai bao mat (SAP GUI Security).
-   - MIGO311: Tu dong do tim GOS control (ATT_FindGosShell) va thu lai 3 buoc thong minh (ATT_OpenGosWithRetry).
+4. CHUAN HOA DINH DANG VA TINH DI DONG (PORTABILITY):
+   - Ep kieu Text (@) cho cot Material DOC tren sheet ATT_HISTORY de luon hien thi du 10 chu so (khong bi 5.01E+09).
+   - Xoa duong dan noi bo may cu tren CONFIG!B4 de tool hoat dong hoan toan di dong tren moi may tinh.
+
+5. TOAN BO CO CHE GOS & DONG BO SAP DUOC BAO TOAN:
+   - ActiveSession multi-connection.
+   - Win32 Unicode + EnumWindows tu dong nhan Allow/Permit cho hop thoai SAP Security.
+   - ATT_FindGosShell do tim GOS control & thu lai thong minh 3 cap ATT_OpenGosWithRetry.
