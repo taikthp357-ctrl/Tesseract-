@@ -19,3 +19,8 @@ Modules Integrated:
   - ModuleSAP.bas                      : All-Connection Search + WaitIdle
   - modWinFileDialog.bas               : Win32 Unicode + EnumWindows Auto SAP Security Click
   - MIGO311_RunPost_V24_ErrorGuard.bas : Dynamic GOS Adapter + 3-Tier Retry + High-Speed Array + Doc Lock Check
+
+[RELEASE_V2.8] 2026-08-21 17:48:35
+File: 260821_CF_OB_V2.8.xlsm (SHA256: 07AD28927CF1B6C3298B11379344B59FD1D7DDD90E60DA55C769AE4CA8027DB4)
+Zip:  CF_OB_V2.8_RELEASE.zip (SHA256: 43A6E027E20F2D94971D4E60F607707F5BEEDDC69031D3C417B3DFBDD797602A)
+Gates: 10/10 PASS (100% Green, Single Visible Sheet CF_CONTROL)
